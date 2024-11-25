@@ -1,6 +1,11 @@
 package es.santander.ascender.proyecto08;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -12,15 +17,34 @@ public class BattleRoyalTest {
 
         a = new Dates();
         a = new FechaHora();
-        
+
         String resultado;
         if (a instanceof Dates) {
-             resultado = a.getDateTimeWithTimeZone();
+            resultado = a.getDateTimeWithTimeZone();
         } else {
             resultado = a.getDateTimeWithTimeZone();
         }
 
         a.getRandomDiaSemana();
+    }
+
+    @Test
+    public void testStream(){
+        List <String> lista = Arrays.asList("Hola", "Adios", "Hi", "Goodbye");
+
+        // Test que le pasas un arrayList y suma la longitud de las cadenas mayores o iguales que 5
+        int suma = lista.stream()
+                .mapToInt(s -> s.length())
+                .filter(x -> x>=5)
+                .sum();
+        
+        assertEquals(suma, 12);
+        
+        List<String> cadenasCortas = lista.stream()
+                .filter(s -> s.length() < 5)
+                .collect(Collectors.toList());
+
+        assertEquals(2, cadenasCortas.size());
     }
 
 }
